@@ -1,0 +1,29 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{% block title %}JNL{% endblock %}</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Source+Serif+4:wght@600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="{% static 'css/base.css' %}">
+</head>
+<body>
+  <main class="auth">
+    <aside class="auth__hero">
+      <h2 class="auth__tagline">{% block tagline %}{% endblock %}</h2>
+    </aside>
+
+    <section class="auth__panel">
+      <div class="auth__card">
+        <div class="logo" aria-label="JNL">JNL</div>
+        {% block content %}{% endblock %}
+      </div>
+    </section>
+  </main>
+
+  <script src="{% static 'js/base.js' %}"></script>
+</body>
+</html>

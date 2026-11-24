@@ -1,0 +1,67 @@
+{% extends "accounts/base.html" %}
+
+{% block title %}Sign up | JNL{% endblock %}
+{% block tagline %}A better start begins today.{% endblock %}
+
+{% block content %}
+<h1 class="auth__title">Create your account</h1>
+<p class="auth__subtitle">It only takes a minute to get started.</p>
+
+<form method="post" class="form form--signup" novalidate>
+  {% csrf_token %}
+
+  <div class="field">
+    <label for="id_full_name">Fullname</label>
+    <input type="text" id="id_full_name" name="full_name"
+           placeholder="Your full name" autocomplete="name"
+           value="{{ form.full_name.value|default:'' }}" required>
+    {% if form.full_name.errors %}<span class="field__error">{{ form.full_name.errors.0 }}</span>{% endif %}
+  </div>
+
+  <div class="field">
+    <label for="id_email">Email</label>
+    <input type="email" id="id_email" name="email"
+           placeholder="you@example.com" autocomplete="email"
+           value="{{ form.email.value|default:'' }}" required>
+    {% if form.email.errors %}<span class="field__error">{{ form.email.errors.0 }}</span>{% endif %}
+  </div>
+
+  <div class="field">
+    <label for="id_password1">Password</label>
+    <div class="input-wrap">
+      <input type="password" id="id_password1" name="password1"
+             placeholder="Enter your password" autocomplete="new-password" required>
+      <button type="button" class="toggle-pw" data-target="id_password1">Show</button>
+    </div>
+
+    <div class="strength" id="strength" data-level="0">
+      <span class="strength__bar"></span>
+      <span class="strength__bar"></span>
+      <span class="strength__bar"></span>
+      <span class="strength__label" id="strength-label"></span>
+    </div>
+    {% if form.password1.errors %}<span class="field__error">{{ form.password1.errors.0 }}</span>{% endif %}
+  </div>
+
+  <div class="field">
+    <label for="id_password2">Confirm password</label>
+    <div class="input-wrap">
+      <input type="password" id="id_password2" name="password2"
+             placeholder="Enter your password" autocomplete="new-password" required>
+      <button type="button" class="toggle-pw" data-target="id_password2">Show</button>
+    </div>
+    {% if form.password2.errors %}<span class="field__error">{{ form.password2.errors.0 }}</span>{% endif %}
+  </div>
+
+  <label class="check check--terms">
+    <input type="checkbox" name="agree" required>
+    <span>I agree to the <a href="#">Terms of Service</a> and <a href="#">Privacy Policy</a>.</span>
+  </label>
+
+  <button type="submit" class="btn">Sign up</button>
+
+  <div class="divider"><span>or</span></div>
+
+  <p class="switch">Already have an account? <a href="{% url 'login_user' %}">Log in</a></p>
+</form>
+{% endblock %}
